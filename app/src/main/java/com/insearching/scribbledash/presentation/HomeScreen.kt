@@ -24,52 +24,64 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.insearching.scribbledash.R
+import com.insearching.scribbledash.presentation.components.BottomBar
+import com.insearching.scribbledash.presentation.components.BottomBarType
 import com.insearching.scribbledash.ui.theme.ScribbleDashTheme
 import com.insearching.scribbledash.utils.DevicePreview
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    onRoundWounderSelected: () -> Unit
+    onRoundWounderSelected: () -> Unit,
+    onTabSelected: (BottomBarType) -> Unit,
 ) {
     Box(
         modifier = modifier
             .fillMaxSize()
             .background(Brush.verticalGradient(ScribbleDashTheme.colors.backgroundGradient))
-            .padding(16.dp)
     ) {
-        Text(
-            text = stringResource(R.string.app_name),
-            style = ScribbleDashTheme.typography.headlineMedium,
-            color = ScribbleDashTheme.colors.onBackground
-        )
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.align(Alignment.Center)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
         ) {
             Text(
-                text = stringResource(R.string.start_drawing),
-                style = ScribbleDashTheme.typography.displayMedium,
+                text = stringResource(R.string.app_name),
+                style = ScribbleDashTheme.typography.headlineMedium,
                 color = ScribbleDashTheme.colors.onBackground
             )
-            Text(
-                text = stringResource(R.string.select_game_mode),
-                style = ScribbleDashTheme.typography.bodyMedium,
-                color = ScribbleDashTheme.colors.onSurface
-            )
-            Spacer(Modifier.height(24.dp))
-            OneRoundWonder(
-                onClick = onRoundWounderSelected
-            )
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.align(Alignment.Center)
+            ) {
+                Text(
+                    text = stringResource(R.string.start_drawing),
+                    style = ScribbleDashTheme.typography.displayMedium,
+                    color = ScribbleDashTheme.colors.onBackground
+                )
+                Text(
+                    text = stringResource(R.string.select_game_mode),
+                    style = ScribbleDashTheme.typography.bodyMedium,
+                    color = ScribbleDashTheme.colors.onSurface
+                )
+                Spacer(Modifier.height(24.dp))
+                OneRoundWonder(
+                    onClick = onRoundWounderSelected
+                )
+            }
         }
+        BottomBar(
+            onTabSelected = onTabSelected,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }
 
 @Composable
 fun OneRoundWonder(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = modifier
@@ -105,7 +117,8 @@ fun OneRoundWonder(
 fun HomeScreenPreview() {
     ScribbleDashTheme {
         HomeScreen(
-            onRoundWounderSelected = {}
+            onRoundWounderSelected = {},
+            onTabSelected = {}
         )
     }
 }

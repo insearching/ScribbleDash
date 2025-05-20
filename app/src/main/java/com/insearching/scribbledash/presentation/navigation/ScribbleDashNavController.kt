@@ -8,12 +8,13 @@ import androidx.navigation.compose.composable
 import com.insearching.scribbledash.presentation.HomeScreen
 import com.insearching.scribbledash.presentation.OneRoundWonderScreen
 import com.insearching.scribbledash.presentation.TimeToDrawScreenRoot
+import com.insearching.scribbledash.presentation.components.BottomBarType
 
 @Composable
 fun ScribbleNavController(
     modifier: Modifier = Modifier,
     startDestination: Screen,
-    controller: NavHostController
+    controller: NavHostController,
 ) {
     NavHost(
         modifier = modifier,
@@ -24,6 +25,18 @@ fun ScribbleNavController(
             HomeScreen(
                 onRoundWounderSelected = {
                     controller.navigate(Screen.OneRoundWounder)
+                },
+                onTabSelected = { type ->
+                    when (type) {
+                        BottomBarType.Stats -> {
+                            // TODO: This destination will be revealed in the next milestone
+                        }
+
+                        BottomBarType.Home -> {
+                            controller.popBackStack()
+                            controller.navigate(Screen.Home)
+                        }
+                    }
                 }
             )
         }
