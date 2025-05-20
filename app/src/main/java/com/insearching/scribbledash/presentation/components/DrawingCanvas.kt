@@ -35,7 +35,6 @@ fun DrawingCanvas(
     val gridColor = ScribbleDashTheme.colors.onSurfaceVar
     Canvas(
         modifier = modifier
-//            .clip(RoundedCornerShape(36.dp))
             .shadow(
                 elevation = 8.dp,
                 shape = RoundedCornerShape(36.dp),

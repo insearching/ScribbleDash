@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -86,7 +87,7 @@ fun TimeToDrawScreen(
                 onAction = onAction,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(400.dp)
+                    .aspectRatio(1f / 1f)
             )
         }
 
@@ -99,14 +100,17 @@ fun TimeToDrawScreen(
             ActionButton(
                 iconRes = R.drawable.ic_undo,
                 onClick = { onAction(DrawingAction.OnUndoClick) },
+                enabled = state.paths.isNotEmpty(),
                 modifier = Modifier.size(64.dp)
             )
             ActionButton(
                 iconRes = R.drawable.ic_redo,
                 onClick = { onAction(DrawingAction.OnRedoClick) },
+                enabled = state.redoEnabled,
                 modifier = Modifier.size(64.dp)
             )
             ScribbleTextButton(
+                enabled = state.paths.isNotEmpty(),
                 text = stringResource(R.string.clear_canvas),
                 onClick = { onAction(DrawingAction.OnClearCanvasClick) },
             )

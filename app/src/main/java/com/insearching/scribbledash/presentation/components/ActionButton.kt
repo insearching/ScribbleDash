@@ -18,14 +18,19 @@ import com.insearching.scribbledash.ui.theme.ScribbleDashTheme
 @Composable
 fun ActionButton(
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     @DrawableRes iconRes: Int,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(22.dp))
-            .background(ScribbleDashTheme.colors.surfaceLow.copy(alpha = 0.4f))
-            .clickable(onClick = onClick)
+            .background(
+                if (enabled)
+                    ScribbleDashTheme.colors.surfaceLow
+                else ScribbleDashTheme.colors.surfaceLow.copy(alpha = 0.4f)
+            )
+            .clickable(onClick = onClick, enabled = enabled)
             .padding(16.dp)
     ) {
         Image(
